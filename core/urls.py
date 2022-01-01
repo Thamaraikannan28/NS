@@ -6,7 +6,7 @@ from core import views
 app_name = 'core'
 
 urlpatterns = [
-    path('home/', views.HomeListView.as_view()),
+    path('home/', views.HomeListView.as_view()), 
     path('service/', views.ServiceListView.as_view()),
     path('upcomingevent/', views.UpcomingEventListView.as_view()),
     path('po/', views.POListView.as_view()),

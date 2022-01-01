@@ -353,7 +353,7 @@ class Sapling(models.Model):
     event = models.CharField(max_length=255, default=None, verbose_name="Event Name ")
     count = models.CharField(max_length=255, default=None, verbose_name=" Sampling Count ")
     About = models.TextField(max_length=500, null=True, default=None, verbose_name="Event Description")
-    count = models.CharField(max_length=255, default=None, verbose_name=" Year ")
+    year = models.CharField(max_length=255, default=None, verbose_name=" Year ")
     image1 = models.ImageField(null=True, upload_to=file_path11,
                                 verbose_name= "Image 1")
 
