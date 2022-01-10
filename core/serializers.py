@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from core.models import Home, Services, UpcomingEvent, POs, AC, PMY, \
-                        DL, NLM, SBM, UBA, Awards, Reports, ActivityCalendar, \
-                            Assets, VT, Sapling, BDC, Camp, Seminar
+from core.models import Home, Services, UpcomingEvent, Structure, POs, AC, PMY, \
+                        NLM, UBA, Awards, Reports, ActivityCalendar, \
+                            Assets, VT, Sapling, BDC, Camp, Seminar, Others
 
 
 class HomeSerializer(serializers.ModelSerializer):
@@ -23,6 +23,12 @@ class UpcomingEventSerializer(serializers.ModelSerializer):
         model = UpcomingEvent
         fields = '__all__'
 
+class StructureSerializer(serializers.ModelSerializer):
+    """Serializer for Structure Image"""
+    class Meta:
+        model = Structure
+        fields = '__all__'
+
 class POSerializer(serializers.ModelSerializer):
     """Serializer for POs"""
     class Meta:
@@ -41,11 +47,11 @@ class PMYSerializer(serializers.ModelSerializer):
         model = PMY
         fields = '__all__'
 
-class DLSerializer(serializers.ModelSerializer):
-    """Serializer for DL"""
-    class Meta:
-        model = DL
-        fields = '__all__'
+# class DLSerializer(serializers.ModelSerializer):
+#     """Serializer for DL"""
+#     class Meta:
+#         model = DL
+#         fields = '__all__'
 
 class NLMSerializer(serializers.ModelSerializer):
     """Serializer for NLM"""
@@ -53,11 +59,11 @@ class NLMSerializer(serializers.ModelSerializer):
         model = NLM
         fields = '__all__'
 
-class SBMSerializer(serializers.ModelSerializer):
-    """Serializer for SBM"""
-    class Meta:
-        model = SBM
-        fields = '__all__'
+# class SBMSerializer(serializers.ModelSerializer):
+#     """Serializer for SBM"""
+#     class Meta:
+#         model = SBM
+#         fields = '__all__'
 
 class UBASerializer(serializers.ModelSerializer):
     """Serializer for UBA"""
@@ -117,4 +123,10 @@ class SeminarSerializer(serializers.ModelSerializer):
     """Serializer for Seminar"""
     class Meta:
         model = Seminar
+        fields = '__all__'
+
+class OtherSerializer(serializers.ModelSerializer):
+    """Serializer for Seminar"""
+    class Meta:
+        model = Others
         fields = '__all__'

@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from rest_framework import generics
-from core.models import Home, Services, UpcomingEvent, POs, AC, PMY, \
-                        DL, NLM, SBM, UBA, Awards, Reports, ActivityCalendar, \
-                            Assets, VT, Sapling, BDC, Camp, Seminar
+from core.models import Home, Services, UpcomingEvent, Structure, POs, AC, PMY, \
+                        NLM, UBA, Awards, Reports, ActivityCalendar, \
+                            Assets, VT, Sapling, BDC, Camp, Seminar, Others
 from core.serializers import HomeSerializer, ServiceSerializer, UpcomingEventSerializer, \
-                                POSerializer, ACSerializer, PMYSerializer, \
-                                DLSerializer, NLMSerializer, SBMSerializer, UBASerializer,\
+                                StructureSerializer, POSerializer, ACSerializer, PMYSerializer, \
+                                 NLMSerializer, UBASerializer,\
                                 AwardsSerializer, ReportSerializer, ActivityCalendarSerializer, \
                                 AssetSerializer, VTSerializer, SaplingSerializer, BDCSerializer, \
-                                CampSerializer, SeminarSerializer
+                                CampSerializer, SeminarSerializer, OtherSerializer
 
 class HomeListView(generics.ListAPIView):
     """API view for Home"""
@@ -21,9 +21,14 @@ class ServiceListView(generics.ListAPIView):
     serializer_class = ServiceSerializer
 
 class UpcomingEventListView(generics.ListAPIView):
-    """API view for """
+    """API view for upcoming events"""
     queryset = UpcomingEvent.objects.all()
     serializer_class = UpcomingEventSerializer
+
+class StructureListView(generics.ListAPIView):
+    """API view for upcoming events"""
+    queryset = Structure.objects.all()
+    serializer_class = StructureSerializer
 
 class POListView(generics.ListAPIView):
     """API view for PO"""
@@ -40,20 +45,20 @@ class PMYListView(generics.ListAPIView):
     queryset = PMY.objects.all()
     serializer_class = PMYSerializer
 
-class DLListView(generics.ListAPIView):
-    """API view for DL"""
-    queryset = DL.objects.all()
-    serializer_class = DLSerializer
+# class DLListView(generics.ListAPIView):
+#     """API view for DL"""
+#     queryset = DL.objects.all()
+#     serializer_class = DLSerializer
 
 class NLMListView(generics.ListAPIView):
     """API view for NLM"""
     queryset = NLM.objects.all()
     serializer_class = NLMSerializer
 
-class SBMListView(generics.ListAPIView):
-    """API view for """
-    queryset = SBM.objects.all()
-    serializer_class = SBMSerializer
+# class SBMListView(generics.ListAPIView):
+#     """API view for """
+#     queryset = SBM.objects.all()
+#     serializer_class = SBMSerializer
 
 class UBAListView(generics.ListAPIView):
     """API view for UBA"""
@@ -104,3 +109,8 @@ class SeminarListView(generics.ListAPIView):
     """API view for Seminar"""
     queryset = Seminar.objects.all()
     serializer_class = SeminarSerializer
+
+class OtherListView(generics.ListAPIView):
+    """API view for Seminar"""
+    queryset = Others.objects.all()
+    serializer_class = OtherSerializer

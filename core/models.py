@@ -85,6 +85,15 @@ def file_path16(instance,filename):
     filename = f'{uuid.uuid4()}.{ext}'
     return os.path.join("pdfs/Assets",filename)
 
+def file_path17(instance,filename):
+    ext=filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+    return os.path.join("images/structure",filename)
+
+def file_path18(instance,filename):
+    ext=filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+    return os.path.join("images/Others",filename)
 
 class UserManager(BaseUserManager):
 
@@ -154,14 +163,25 @@ class UpcomingEvent(models.Model):
     def __str__(self):
         return self.event
 
+class Structure(models.Model):
+    """Model for creating slider of services in homepage"""
+    class Meta:
+        verbose_name_plural = "NSS Structure"
+
+    image = models.ImageField(null=True, upload_to=file_path17, 
+                                verbose_name= "Structure Image(For update , replace this image only)")
+
+    def __str__(self):
+        return "Image Structure(Replace this only for update)"
+
 class POs(models.Model):
     """Model for updating Programme Officers"""
 
     class Meta:
         verbose_name_plural = "Programme Officers"
 
-    name = models.CharField(max_length=255, default=None, verbose_name="Event Name")
-    position = models.CharField(max_length=255, default=None, verbose_name="Event Data & Time")
+    name = models.CharField(max_length=255, default=None, verbose_name="Name")
+    position = models.CharField(max_length=255, default=None, verbose_name="Position")
     photo = models.ImageField(null=True, upload_to=file_path3, 
                                 validators=[FileExtensionValidator(allowed_extensions=['jpeg','jpg'])],
                                 verbose_name="Photo")
@@ -175,8 +195,8 @@ class AC(models.Model):
         verbose_name_plural = "Advisory Committee"
 
     S_No = models.IntegerField(unique=True, verbose_name="S.No.")
-    name = models.CharField(max_length=255, default=None, verbose_name="Event Name")
-    position = models.CharField(max_length=255, default=None, verbose_name="Event Data & Time")
+    name = models.CharField(max_length=255, default=None, verbose_name="Name")
+    position = models.CharField(max_length=255, default=None, verbose_name="Position")
 
     def __str__(self):
         return self.name
@@ -196,29 +216,29 @@ class PMY(models.Model):
         return self.title
 
 
-class DL(models.Model):
-    """Model for updating Digital Literacy"""
-    class Meta:
-        verbose_name_plural = "Digital Literacy"
+# class DL(models.Model):
+#     """Model for updating Digital Literacy"""
+#     class Meta:
+#         verbose_name_plural = "Digital Literacy"
 
-    title = models.CharField(max_length=255, default=None, verbose_name="Scheme Title ")
-    image1 = models.ImageField(null=True, upload_to=file_path5,
-                                verbose_name= "Image 1")
-    date1 = models.CharField(max_length=255, default=None, verbose_name="Date")
-    image2 = models.ImageField(null=True, upload_to=file_path5,
-                                verbose_name= "Image 2")
-    date2 = models.CharField(max_length=255, default=None, verbose_name="Date")
-    image3 = models.ImageField(null=True, upload_to=file_path5,
-                                verbose_name= "Image 3")
-    date3 = models.CharField(max_length=255, default=None, verbose_name="Date")
-    image4 = models.ImageField(null=True, upload_to=file_path5,
-                                verbose_name= "Image 4")
-    date4 = models.CharField(max_length=255, default=None, verbose_name="Date")
-    video = models.URLField(max_length=500, default=None,null=True, verbose_name="Video URL") 
-    place = models.CharField(max_length=255, default=None, verbose_name="Place")
+#     title = models.CharField(max_length=255, default=None, verbose_name="Scheme Title ")
+#     image1 = models.ImageField(null=True, upload_to=file_path5,
+#                                 verbose_name= "Image 1")
+#     date1 = models.CharField(max_length=255, default=None, verbose_name="Date")
+#     image2 = models.ImageField(null=True, upload_to=file_path5,
+#                                 verbose_name= "Image 2")
+#     date2 = models.CharField(max_length=255, default=None, verbose_name="Date")
+#     image3 = models.ImageField(null=True, upload_to=file_path5,
+#                                 verbose_name= "Image 3")
+#     date3 = models.CharField(max_length=255, default=None, verbose_name="Date")
+#     image4 = models.ImageField(null=True, upload_to=file_path5,
+#                                 verbose_name= "Image 4")
+#     date4 = models.CharField(max_length=255, default=None, verbose_name="Date")
+#     video = models.URLField(max_length=500, default=None,null=True, verbose_name="Video URL") 
+#     place = models.CharField(max_length=255, default=None, verbose_name="Place")
 
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.title
 
 
 class NLM(models.Model):
@@ -226,7 +246,9 @@ class NLM(models.Model):
     class Meta:
         verbose_name_plural = "National Literacy Mission"
 
-    date = models.CharField(max_length=255, default=None, verbose_name=" Year ")
+    event = models.CharField(max_length=255, default=None, verbose_name="Event Title")
+    date = models.CharField(max_length=255, default=None, verbose_name="Date & Year ")
+    place = models.CharField(max_length=255, default=None, verbose_name="Place")
     image1 = models.ImageField(null=True, upload_to=file_path6,
                                 verbose_name= "Image 1")
     image2 = models.ImageField(null=True, upload_to=file_path6,
@@ -235,30 +257,31 @@ class NLM(models.Model):
                                 verbose_name= "Image 3")
     image4 = models.ImageField(null=True, upload_to=file_path6,
                                 verbose_name= "Image 4")
-    place = models.CharField(max_length=255, default=None, verbose_name="Place")
+    video = models.URLField(max_length=500, default=None,null=True, verbose_name="Video URL") 
+    
 
     def __str__(self):
         return self.date
 
-class SBM(models.Model):
-    """Model for updating Swachh Bharath Mission"""
-    class Meta:
-        verbose_name_plural = "Swachh Bharath Mission"
+# class SBM(models.Model):
+#     """Model for updating Swachh Bharath Mission"""
+#     class Meta:
+#         verbose_name_plural = "Swachh Bharath Mission"
 
-    date = models.CharField(max_length=255, default=None, verbose_name=" Year ")
-    image1 = models.ImageField(null=True, upload_to=file_path7,
-                                verbose_name= "Image 1")
-    image2 = models.ImageField(null=True, upload_to=file_path7,
-                                verbose_name= "Image 2")
-    image3 = models.ImageField(null=True, upload_to=file_path7,
-                                verbose_name= "Image 3")
-    image4 = models.ImageField(null=True, upload_to=file_path7,
-                                verbose_name= "Image 4")
-    place = models.CharField(max_length=255, default=None, verbose_name="Place")
-    video = models.URLField(max_length=500, default=None,null=True, verbose_name="Video URL")
+#     date = models.CharField(max_length=255, default=None, verbose_name=" Year ")
+#     image1 = models.ImageField(null=True, upload_to=file_path7,
+#                                 verbose_name= "Image 1")
+#     image2 = models.ImageField(null=True, upload_to=file_path7,
+#                                 verbose_name= "Image 2")
+#     image3 = models.ImageField(null=True, upload_to=file_path7,
+#                                 verbose_name= "Image 3")
+#     image4 = models.ImageField(null=True, upload_to=file_path7,
+#                                 verbose_name= "Image 4")
+#     place = models.CharField(max_length=255, default=None, verbose_name="Place")
+#     video = models.URLField(max_length=500, default=None,null=True, verbose_name="Video URL")
 
-    def __str__(self):
-        return self.date
+#     def __str__(self):
+#         return self.date
 
 class UBA(models.Model):
     """Model for updating Unnat Bharat Abhiyan(UBA)"""
@@ -267,11 +290,18 @@ class UBA(models.Model):
 
     event = models.CharField(max_length=255, default=None, verbose_name="Event Name ")
     date = models.CharField(max_length=255, default=None, verbose_name=" Year ")
+    place = models.CharField(max_length=255, default=None, verbose_name="Place")
     description = models.TextField(max_length=500, null=True, default=None, verbose_name="Description")
     image1 = models.ImageField(null=True, upload_to=file_path8,
                                 verbose_name= "Image 1")
     image2 = models.ImageField(null=True, upload_to=file_path8,
                                 verbose_name= "Image 2")
+    image3 = models.ImageField(null=True, upload_to=file_path8,
+                                verbose_name= "Image 3")
+    image4 = models.ImageField(null=True, upload_to=file_path8,
+                                verbose_name= "Image 4")
+    video = models.URLField(max_length=500, default=None,null=True, verbose_name="Youtube URL")
+
  
     def __str__(self):
         return self.event
@@ -288,12 +318,17 @@ class Awards(models.Model):
     def __str__(self):
         return self.description
 
+choice = (
+        ('Report', 'Report'),
+        ('Magazine', 'Magazine'),
+    )
+
 class Reports(models.Model):
     """Model for updating Reports and Magazines"""
     class Meta:
         verbose_name_plural = "Reports & Magazines"
 
-    type = models.CharField(max_length=255, default=None, verbose_name=" type ")
+    type = models.CharField(max_length=255, choices = choice, default=None, verbose_name=" type ")
     year = models.CharField(max_length=255, default=None, verbose_name=" Year ")
     file = models.FileField(null=True,upload_to=file_path14,
                     validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
@@ -334,12 +369,12 @@ class VT(models.Model):
 
     name = models.CharField(max_length=255, default=None, verbose_name="Name ")
     skill = models.CharField(max_length=255, default=None, verbose_name="Skill ")
-    file = models.FileField(null=True,upload_to=file_path10,
+    file = models.FileField(null=True, upload_to=file_path10,
                     validators=[FileExtensionValidator(allowed_extensions=['mp4', 'jpg'])],
                     verbose_name="Video or Image")
-    image1 = models.ImageField(null=True, upload_to=file_path10,
+    image1 = models.ImageField(null=True, blank=True, upload_to=file_path10,
                                 verbose_name= "Image 1")
-    image2 = models.ImageField(null=True, upload_to=file_path10,
+    image2 = models.ImageField(null=True, blank=True, upload_to=file_path10,
                                 verbose_name= "Image 2")
  
     def __str__(self):
@@ -402,3 +437,25 @@ class Seminar(models.Model):
  
     def __str__(self):
         return self.date
+
+class Others(models.Model):
+    """Model for updating other events"""
+    class Meta:
+        verbose_name_plural = "Events Organised (Others)"
+
+    event = models.CharField(max_length=255, default=None, verbose_name="Event Name ")
+    date = models.CharField(max_length=255, default=None, verbose_name=" Date & Time ")
+    description = models.TextField(max_length=500, null=True, default=None, verbose_name="Description")
+    image1 = models.ImageField(null=True, upload_to=file_path18,
+                                verbose_name= "Image 1")
+    image2 = models.ImageField(null=True, upload_to=file_path18,
+                                verbose_name= "Image 2")
+    image3 = models.ImageField(null=True, upload_to=file_path18,
+                                verbose_name= "Image 3")
+    image4 = models.ImageField(null=True, upload_to=file_path18,
+                                verbose_name= "Image 4")
+    video = models.URLField(max_length=500, default=None,null=True, verbose_name="Youtube URL")
+
+ 
+    def __str__(self):
+        return self.event
