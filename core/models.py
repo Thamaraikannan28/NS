@@ -369,13 +369,13 @@ class VT(models.Model):
 
     name = models.CharField(max_length=255, default=None, verbose_name="Name ")
     skill = models.CharField(max_length=255, default=None, verbose_name="Skill ")
-    file = models.FileField(null=True, upload_to=file_path10,
-                    validators=[FileExtensionValidator(allowed_extensions=['mp4', 'jpg'])],
-                    verbose_name="Video or Image")
     image1 = models.ImageField(null=True, blank=True, upload_to=file_path10,
                                 verbose_name= "Image 1")
     image2 = models.ImageField(null=True, blank=True, upload_to=file_path10,
                                 verbose_name= "Image 2")
+    file = models.FileField(null=True, upload_to=file_path10,
+                    validators=[FileExtensionValidator(allowed_extensions=['mp4', 'jpg'])],
+                    verbose_name="Video or Image")
  
     def __str__(self):
         return self.name
@@ -386,7 +386,7 @@ class Sapling(models.Model):
         verbose_name_plural = "Sapling Plantation"
 
     event = models.CharField(max_length=255, default=None, verbose_name="Event Name ")
-    count = models.CharField(max_length=255, default=None, verbose_name=" Sampling Count ")
+    count = models.CharField(max_length=255, default=None, verbose_name=" Sapling Count ")
     About = models.TextField(max_length=500, null=True, default=None, verbose_name="Event Description")
     year = models.CharField(max_length=255, default=None, verbose_name=" Year ")
     image1 = models.ImageField(null=True, upload_to=file_path11,
